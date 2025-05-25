@@ -45,6 +45,7 @@ dependencies:
   - requests>=2.31.0
   - ruamel.yaml>=0.2.5
   - rust
+  - psycopg2
   - safe-pysha3
   - scalecodec
   - scipy>=1.11.1
