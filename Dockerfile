@@ -42,12 +42,13 @@ RUN python3 setup.py build_ext --inplace -j 8 && \
 FROM continuumio/miniconda3:latest AS release
 
 # Dockerfile author / maintainer
-LABEL maintainer="Fede Cardoso @dardonacci <federico@hummingbot.org>"
+LABEL maintainer="Schalk Visagie <25349589@sun.ac.za>"
 
 # Build arguments
 ARG BRANCH=""
 ARG COMMIT=""
 ARG BUILD_DATE=""
+ARG DATE=""
 LABEL branch=${BRANCH}
 LABEL commit=${COMMIT}
 LABEL date=${BUILD_DATE}
@@ -55,6 +56,7 @@ LABEL date=${BUILD_DATE}
 # Set ENV variables
 ENV COMMIT_SHA=${COMMIT}
 ENV COMMIT_BRANCH=${BRANCH}
+ENV DATE=${DATE}
 ENV BUILD_DATE=${DATE}
 
 ENV INSTALLATION_TYPE=docker
@@ -78,4 +80,5 @@ SHELL [ "/bin/bash", "-lc" ]
 
 # Set the default command to run when starting the container
 
-CMD conda activate hummingbot && ./bin/hummingbot_quickstart.py 2>> ./logs/errors.log
+# CMD conda activate hummingbot && ./bin/hummingbot_quickstart.py 2>> ./logs/errors.log
+CMD ["/bin/bash", "-c", "source activate hummingbot && python ./bin/hummingbot_quickstart.py 2>> ./logs/errors.log"]
