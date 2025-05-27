@@ -48,6 +48,7 @@ LABEL maintainer="Fede Cardoso @dardonacci <federico@hummingbot.org>"
 ARG BRANCH=""
 ARG COMMIT=""
 ARG BUILD_DATE=""
+ARG DATE=""
 LABEL branch=${BRANCH}
 LABEL commit=${COMMIT}
 LABEL date=${BUILD_DATE}
@@ -61,7 +62,7 @@ ENV INSTALLATION_TYPE=docker
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y sudo libusb-1.0 && \
+    apt-get install -y sudo libusb-1.0 xclip xsel && \
     rm -rf /var/lib/apt/lists/*
 
 # Create mount points
